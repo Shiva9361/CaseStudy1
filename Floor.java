@@ -1,7 +1,7 @@
 public class Floor {
-    private int capacity;
-    private char[] entryPoints;
-    private char[] exitPoints;
+    int capacity;
+    char[] entryPoints;
+    char[] exitPoints;
     boolean[] parkingSpaceCompact;
     boolean[] parkingSpaceLarge;
     boolean[] parkingSpacehandicapped;
