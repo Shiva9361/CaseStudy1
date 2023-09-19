@@ -2,21 +2,21 @@ import java.util.Scanner;
 
 public class CustomerInfoPortal {
     CustomerInfoPortal(Scanner sc,Customer[] customers){
-        login(customers, sc);
+        this.login(customers, sc);
     }
     
-    public static void login(Customer[] customers,Scanner sc){
+    private void login(Customer[] customers,Scanner sc){
         boolean login = false;
         boolean exit = false;
         while(!login && !exit){
             System.out.println("Customer Info Portal");
             System.out.println("Login\nUserName:");
-            String name = sc.nextLine();
+            String customerId = sc.nextLine();
             System.out.println("Password:");
             String password = sc.nextLine();
-            Customer customer;
+            Customer customer = new Customer(customerId, 0, password, 0, 0);
             for (Customer c:customers){
-                if ((c.customerId.compareTo(name)==0) && (password.compareTo(c.password)==0)){
+                if ((c.customerId.compareTo(customerId)==0) && (password.compareTo(c.password)==0)){
                     System.out.println("Logged in");
                     login=true;customer=c;
                     break;
@@ -30,11 +30,14 @@ public class CustomerInfoPortal {
                     exit=true;
                 }
             }else{
-                menu(c);
+                this.menu(customer,sc);
             }
         }
     }
-    public 
+    private void menu(Customer c,Scanner sc){
+        //add option to pay and just use credit card(can't pay in cash to a machine)
+        //should also close the person's ticket after payment
+    } 
     
 
 }
