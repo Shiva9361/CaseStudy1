@@ -9,8 +9,8 @@ public class Main {
         customerData[1] = new Customer("b", "8888888888", null, 0, 0,"bb");
         customerData[2] = new Customer("c", "0000000000", null, 0, 0,"cc");// add some id
 
-        CustomerInfoPortal cip = new CustomerInfoPortal(sc,customerData);
-        
+        //CustomerInfoPortal cip = new CustomerInfoPortal(sc,customerData);
+        Floor f1 = new Floor(2, 3, 6, 7, 7, 0, 1);
         sc.close();
     }
 }
