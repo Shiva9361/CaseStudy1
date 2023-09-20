@@ -1,15 +1,16 @@
 public class Customer {
     String customerId;
-    int phoneNumber;
+    String phoneNumber;
     String address;
     String password;
     int accountBalance;
-    int creditcardNumber;
-    Customer(String customerId,int phoneNumber,String address,int accountBalance,int creditcardNumber){
+    int creditCardNumber;
+    Customer(String customerId,String phoneNumber,String address,int accountBalance,int creditCardNumber,String password){
         this.customerId=customerId;
         this.phoneNumber=phoneNumber;
         this.address=address;
         this.accountBalance=accountBalance;
-        this.creditcardNumber=creditcardNumber;
+        this.creditCardNumber=creditCardNumber;
+        this.password=password;
     }
 }
