@@ -16,7 +16,8 @@ public class Floor {
     private boolean[] parkingSpacehandicapped;
     private boolean[] parkingSpaceMotercycle;
     private boolean[] parkingSpaceElectricVehicle;
-    
+    CustomerInfoPortal customerInfoPortal;
+    ElectricPannel electricPannel;
     //private int floorNumber; seems to be of no use
 
     Floor(int entryPoints,int exitPoints,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int parkingSpaceElectricVehicle,int floorNumber){
