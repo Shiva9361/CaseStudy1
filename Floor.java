@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Floor {
     private int capacity;
-    // Diffent floors might have different number of entries and exists hence they are implemented as an array 
+    // Diffent floors might have different number of entries and exits hence they are implemented as an array 
     // Moreover Each point of entry/exit has to supply tickets and genreate bills hene
     EntryPoint[] entryPoints;
     ExitPoint[] exitPoints;
