@@ -109,9 +109,9 @@ public class Floor {
             }
             return cost;
         }
-        protected int payment(Scanner sc,long creditCardNumber,ArrayList<Ticket> tickets){
+      static protected int payment(Scanner sc,long creditCardNumber,ArrayList<Ticket> tickets){
             //int cost = costCalculation(ticket);
-            // We are assuming that credit card is in working condition and the payment is being handeled by some module
+            // We are assuming that credit card is in working condition and the payment is being handled by some module which further connects to the main account of the parking lot authority
             System.out.println("Enter ticket id");
             String ticketId = sc.nextLine();
             for(Ticket t:tickets){
