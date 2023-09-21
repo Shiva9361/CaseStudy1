@@ -70,16 +70,17 @@ public class Floor {
         EntryPoint(char id){
             this.id = id;
         }
-        protected String generateTicket(Scanner sc,ArrayList<Ticket> tickets){
+        protected String generateTicket(Scanner sc,ArrayList<Ticket> tickets,ArrayList<Customer> customers){
 
             System.out.println("Enter Customer ID (Leave blank if not registered): ");
             String customerId= sc.nextLine();
             System.out.println("Enter phone number (Leave blank if customer id is given): ");
             String phoneNumber= sc.nextLine();
-
+            
+            String type="";
             while(true){
                 System.out.println("Pick a parking type\n1:Compact\n2:Large\n3:Handicapped\n4:Motercycle");
-                String type=sc.nextLine();
+                type=sc.nextLine();
             
                 if (type.compareTo("1")==0){
                     if (!isfull(parkingSpaceCompact)){
@@ -135,10 +136,10 @@ public class Floor {
             }
             // If customer id is not given, use different constructor 
             if (customerId.compareTo("")==0){
-                tempTicket = new Ticket(phoneNumber, tickets);
+                tempTicket = new Ticket(phoneNumber, tickets,Integer.parseInt(type));
             }
             else{
-                tempTicket = new Ticket(tickets,customerId); //
+                tempTicket = new Ticket(tickets,customerId,Integer.parseInt(type),customers); //
             }
             return tempTicket.ticketId;
         }
@@ -165,12 +166,13 @@ public class Floor {
             return cost;
         }
         protected int payment(Scanner sc,long creditCardNumber,ArrayList<Ticket> tickets){
-            //int cost = costCalculation(ticket);
+            
             // We are assuming that credit card is in working condition and the payment is being handeled by some module
             System.out.println("Enter ticket id");
             String ticketId = sc.nextLine();
             for(Ticket t:tickets){
                 if(t.ticketId.compareTo(ticketId)==0){
+                    System.out.println("Cost: "+costCalculation(t));
                     System.out.println("Payment successful");
                     tickets.remove(t);
                     return 0;
