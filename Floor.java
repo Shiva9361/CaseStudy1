@@ -52,6 +52,14 @@ public class Floor {
         }
         return true;
     }
+    int freeSpace(boolean[] parkingType){
+        for(int i=0;i<parkingType.length;i++){
+            if(!parkingType[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
     
     abstract class Points{
         char id;
@@ -68,6 +76,58 @@ public class Floor {
             String customerId= sc.nextLine();
             System.out.println("Enter phone number (Leave blank if customer id is given): ");
             String phoneNumber= sc.nextLine();
+
+            while(true){
+                System.out.println("Pick a parking type\n1:Compact\n2:Large\n3:Handicapped\n4:Motercycle");
+                String type=sc.nextLine();
+            
+                if (type.compareTo("1")==0){
+                    if (!isfull(parkingSpaceCompact)){
+                        int allotedSpace = freeSpace(parkingSpaceCompact);
+                        parkingSpaceCompact[allotedSpace]=true;
+                    
+                    }
+                    else{
+                        System.out.println("Floor full");
+                    }
+                    break;
+                }
+                else if (type.compareTo("2")==0){
+                    if (!isfull(parkingSpaceLarge)){
+                        int allotedSpace = freeSpace(parkingSpaceLarge);
+                        parkingSpaceLarge[allotedSpace]=true;
+    
+                    }
+                    else{
+                        System.out.println("Floor full");
+                    }
+                    break;
+                }
+                else if (type.compareTo("4")==0){
+                    if (!isfull(parkingSpaceMotercycle)){
+                        int allotedSpace = freeSpace(parkingSpaceMotercycle);
+                        parkingSpaceMotercycle[allotedSpace]=true;
+                    }
+                    else{
+                        System.out.println("Floor full");
+                    }
+                    break;
+                }
+                else if (type.compareTo("3")==0){
+                    if (!isfull(parkingSpacehandicapped)){
+                        int allotedSpace = freeSpace(parkingSpacehandicapped);
+                        parkingSpacehandicapped[allotedSpace]=true;
+                    }
+                    else{
+                        System.out.println("Floor full");
+                    }
+                    break;
+                }
+                else{
+                    System.out.println("Invalid choice");
+                }
+            }
+            
             Ticket tempTicket; 
             if(customerId.compareTo("")==0 && phoneNumber.compareTo("")==0){
                 System.out.println("No data given.. Ticket generation failed");
@@ -78,7 +138,7 @@ public class Floor {
                 tempTicket = new Ticket(phoneNumber, tickets);
             }
             else{
-                tempTicket = new Ticket(tickets,customerId); // change to have type detail
+                tempTicket = new Ticket(tickets,customerId); //
             }
             return tempTicket.ticketId;
         }
