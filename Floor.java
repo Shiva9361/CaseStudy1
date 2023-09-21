@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Floor {
     private int capacity;
-    private EntryPoint[] entryPoints;
-    private ExitPoint[] exitPoints;
+    EntryPoint[] entryPoints;
+    ExitPoint[] exitPoints;
     private boolean[] parkingSpaceCompact;
     private boolean[] parkingSpaceLarge;
     private boolean[] parkingSpacehandicapped;
@@ -62,28 +62,32 @@ public class Floor {
         EntryPoint(char id){
             this.id = id;
         }
-        protected void generateTicket(Scanner sc,ArrayList<Ticket> tickets){
+        protected String generateTicket(Scanner sc,ArrayList<Ticket> tickets){
 
             System.out.println("Enter Customer ID (Leave blank if not registered): ");
             String customerId= sc.nextLine();
-            System.out.println("Enter phone number: ");
+            System.out.println("Enter phone number (Leave blank if customer id is given): ");
             String phoneNumber= sc.nextLine();
-
+            Ticket tempTicket; 
+            if(customerId.compareTo("")==0 && phoneNumber.compareTo("")==0){
+                System.out.println("No data given.. Ticket generation failed");
+                return "";
+            }
             // If customer id is not given, use different constructor 
             if (customerId.compareTo("")==0){
-                new Ticket(phoneNumber, tickets);
+                tempTicket = new Ticket(phoneNumber, tickets);
             }
             else{
-                new Ticket(customerId, phoneNumber, tickets);
+                tempTicket = new Ticket(tickets,customerId);
             }
-            
+            return tempTicket.ticketId;
         }
     }
     class ExitPoint extends Points{
         ExitPoint(char id){
             this.id = id;
         }
-        protected int costCalculation(Ticket ticket){
+        private int costCalculation(Ticket ticket){
             float timeSpent = (float)((ticket.entryTime-System.currentTimeMillis())/2);// half an hour per millis
             int cost=0;
             if (timeSpent<=1.0){
@@ -100,26 +104,40 @@ public class Floor {
             }
             return cost;
         }
-        protected void payment(String creditCardNumber,Ticket ticket,ArrayList<Ticket> tickets){
+        protected int payment(long creditCardNumber,Scanner sc,ArrayList<Ticket> tickets){
             //int cost = costCalculation(ticket);
             // We are assuming that credit card is in working condition and the payment is being handeled by some module
-                System.out.println("Payment successful");
-                tickets.remove(ticket);
-            
+            System.out.println("Enter ticket id");
+            String ticketId = sc.nextLine();
+            for(Ticket t:tickets){
+                if(t.ticketId.compareTo(ticketId)==0){
+                    System.out.println("Payment successful");
+                    tickets.remove(t);
+                    return 0;
+                }
+            }
+            System.out.println("Ticket id not valid");
+            return -1; 
         }
-        protected void payment(int cash,Ticket ticket,ArrayList<Ticket> tickets){
-            int cost = costCalculation(ticket);
-            if (cash>=cost){
-                System.out.println("Return amount: "+(cash-cost));
-                System.out.println("Payment successful");
-                tickets.remove(ticket);
-            }
-            else{
-                System.out.println("Given cash is not enough!!");
-            }
-            //Simulate, if more given, return the payment
+        protected int payment(int cash,Scanner sc,ArrayList<Ticket> tickets){
+            System.out.println("Enter ticket id"); 
+            String ticketId = sc.nextLine();
+            for(Ticket t:tickets){
+                    if(t.ticketId.compareTo(ticketId)==0){
+                        int cost = costCalculation(t);
+                        if (cash>=cost){
+                            System.out.println("Return amount: "+(cash-cost));
+                            System.out.println("Payment successful");
+                            tickets.remove(t);
+                        }
+                        else{
+                            System.out.println("Given cash is not enough!!");
+                        }
+                        return 0;
+                    }
+                }
+            System.out.println("Ticket id not valid");
+            return -1;    
         }
     }
-
-
 }
