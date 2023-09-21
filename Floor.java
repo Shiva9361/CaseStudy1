@@ -4,8 +4,13 @@ import java.util.Scanner;
 
 public class Floor {
     private int capacity;
+    // Diffent floors might have differnt number of entries and exists hence they are implemented as an array 
+    // Moreover Each point of entry/exit has to supply tickets and genreate bills hene
     EntryPoint[] entryPoints;
     ExitPoint[] exitPoints;
+    /*
+     * Parking space is divided based on the type and each is implemented as a boolean array
+     */
     private boolean[] parkingSpaceCompact;
     private boolean[] parkingSpaceLarge;
     private boolean[] parkingSpacehandicapped;
