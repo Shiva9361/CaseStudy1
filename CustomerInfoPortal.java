@@ -52,18 +52,18 @@ public class CustomerInfoPortal {
         long creditCardNumber=sc.nextLong();sc.nextLine();
         System.out.println("Enter a new password");
         String password = sc.nextLine();
-        String customerId = UUID.randomUUID().toString();
+        String customerId = UUID.randomUUID().toString().substring(0, 7);
         Customer tempCustomer = new Customer(customerId, phoneNumber, address, 0, creditCardNumber, password);
         customers.add(tempCustomer);
         System.out.println("Account Created !!\nUserid: "+tempCustomer.customerId);
-        
+        System.out.println("");
         login(customers, sc,tickets);
     }
     private void menu(Customer c,Scanner sc,ArrayList<Ticket> tickets){
         System.out.println("1:Pay pending payment\n0:Quit");
-        String choice = sc.nextLine();
         boolean quit = false;
         while(!quit){
+            String choice = sc.nextLine();
             if (choice.compareTo("1")==0){
                 payment(sc, c.creditCardNumber, c.latestTicketId,tickets);
             }
@@ -73,6 +73,8 @@ public class CustomerInfoPortal {
             else{
                 System.out.println("Invalid Choice");
             }
+            System.out.println();
+            System.out.println("1:Pay pending payment\n0:Quit");
         }
         //add option to pay and just use credit card(can't pay in cash to a machine)
         //should also close the person's ticket after payment
@@ -96,12 +98,17 @@ public class CustomerInfoPortal {
     }
     protected void payment(Scanner sc,long creditCardNumber,String ticketId,ArrayList<Ticket>tickets){
         // Again assuming credit card works
+        boolean ispresent=false;
         for(Ticket t:tickets){
             if(t.ticketId.compareTo(ticketId)==0){
                 tickets.remove(t);
                 System.out.println("Cost: "+costCalculation(t));
                 System.out.println("Payment successful");
+                ispresent=true;
+                break;
             }
+        }if(!ispresent){
+            System.out.println("No pending Payments");
         }
     }
     
