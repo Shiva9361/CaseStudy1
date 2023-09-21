@@ -78,7 +78,7 @@ public class Floor {
                 tempTicket = new Ticket(phoneNumber, tickets);
             }
             else{
-                tempTicket = new Ticket(tickets,customerId);
+                tempTicket = new Ticket(tickets,customerId); // change to have type detail
             }
             return tempTicket.ticketId;
         }
