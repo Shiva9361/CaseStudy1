@@ -3,8 +3,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Floor {
-    private int capacity;
-    // Diffent floors might have differnt number of entries and exists hence they are implemented as an array 
+    // private int capacity;
+    // Diffent floors might have different number of entries and exists hence they are implemented as an array 
     // Moreover Each point of entry/exit has to supply tickets and genreate bills hene
     EntryPoint[] entryPoints;
     ExitPoint[] exitPoints;
@@ -17,7 +17,7 @@ public class Floor {
     private boolean[] parkingSpaceMotercycle;
     private boolean[] parkingSpaceElectricVehicle;
     
-    private int floorNumber;
+    //private int floorNumber; seems to be of no use
 
     Floor(int entryPoints,int exitPoints,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int parkingSpaceElectricVehicle,int floorNumber){
         this.entryPoints=new EntryPoint[entryPoints];
@@ -38,9 +38,8 @@ public class Floor {
         this.parkingSpaceElectricVehicle =new boolean[parkingSpaceElectricVehicle];
         Arrays.fill(this.parkingSpaceElectricVehicle,false);
         
-        
-        this.floorNumber=floorNumber;
-        this.capacity=parkingSpaceCompact+parkingSpaceLarge+parkingSpaceMotercycle+parkingSpacehandicapped;
+        //this.floorNumber=floorNumber;
+        //this.capacity=parkingSpaceCompact+parkingSpaceLarge+parkingSpaceMotercycle+parkingSpacehandicapped;
 
         char entryId='a';
         for(int i=0;i<entryPoints;i++){
@@ -90,7 +89,7 @@ public class Floor {
             
             String type="";
             while(true){
-                System.out.println("Pick a parking type\n1:Compact\n2:Large\n3:Handicapped\n4:Motercycle");
+                System.out.println("Pick a parking type\n1:Compact\n2:Large\n3:Handicapped\n4:Motercycle\n5:Electric");
                 type=sc.nextLine();
             
                 if (type.compareTo("1")==0){
@@ -129,6 +128,16 @@ public class Floor {
                     if (!isfull(parkingSpacehandicapped)){
                         int allotedSpace = freeSpace(parkingSpacehandicapped);
                         parkingSpacehandicapped[allotedSpace]=true;
+                    }
+                    else{
+                        System.out.println("Floor full");
+                    }
+                    break;
+                }
+                else if (type.compareTo("5")==0){
+                    if (!isfull(parkingSpaceElectricVehicle)){
+                        int allotedSpace = freeSpace(parkingSpaceElectricVehicle);
+                        parkingSpaceElectricVehicle[allotedSpace]=true;
                     }
                     else{
                         System.out.println("Floor full");
