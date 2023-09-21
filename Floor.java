@@ -104,7 +104,7 @@ public class Floor {
             }
             return cost;
         }
-        protected int payment(long creditCardNumber,Scanner sc,ArrayList<Ticket> tickets){
+        protected int payment(Scanner sc,long creditCardNumber,ArrayList<Ticket> tickets){
             //int cost = costCalculation(ticket);
             // We are assuming that credit card is in working condition and the payment is being handeled by some module
             System.out.println("Enter ticket id");
