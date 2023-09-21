@@ -2,5 +2,7 @@
 
 public class Vehicle {
     int size;
+    String vehicleid;
+    
 
 }
