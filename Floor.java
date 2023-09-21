@@ -10,9 +10,11 @@ public class Floor {
     private boolean[] parkingSpaceLarge;
     private boolean[] parkingSpacehandicapped;
     private boolean[] parkingSpaceMotercycle;
+     private boolean[] parkingSpaceelectricVehicle;
+    
     private int floorNumber;
 
-    Floor(int entryPoints,int exitPoints,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int floorNumber){
+    Floor(int entryPoints,int exitPoints,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int parkingSpaceElectricVehicle,int floorNumber){
         this.entryPoints=new EntryPoint[entryPoints];
         this.exitPoints=new ExitPoint[exitPoints];
         
@@ -27,6 +29,9 @@ public class Floor {
         
         this.parkingSpacehandicapped=new boolean[parkingSpacehandicapped];
         Arrays.fill(this.parkingSpacehandicapped,false);
+         this.parkingSpaceelectricVehicle =new boolean[parkingSpaceelectricVehicle];
+        Arrays.fill(this.parkingSpaceelectricVehicle,false);
+        
         
         this.floorNumber=floorNumber;
         this.capacity=parkingSpaceCompact+parkingSpaceLarge+parkingSpaceMotercycle+parkingSpacehandicapped;
