@@ -3,20 +3,19 @@ import java.util.Scanner;
 import java.util.UUID; // for customer id generation
 
 public class CustomerInfoPortal {
-    CustomerInfoPortal(Scanner sc,ArrayList<Customer> customers){
+    CustomerInfoPortal(Scanner sc,ArrayList<Customer> customers,ArrayList<Ticket> tickets){
         System.out.println("Customer Info Portal");
         System.out.println("Existing User?(y/n)");
         String customerId=sc.nextLine();
         if (customerId.compareTo("n")==0){
-            this.signUp(customers,sc);
+            this.signUp(customers,sc,tickets);
         }
         else{
-            this.login(customers, sc);
-
+            this.login(customers, sc,tickets);
         }
     }
     
-    private void login(ArrayList<Customer> customers,Scanner sc){
+    private void login(ArrayList<Customer> customers,Scanner sc,ArrayList<Ticket> tickets){
         boolean login = false;
         boolean exit = false;
         while(!login && !exit){
@@ -40,11 +39,11 @@ public class CustomerInfoPortal {
                     exit=true;
                 }
             }else{
-                this.menu(customer,sc);
+                this.menu(customer,sc,tickets);
             }
         }
     }
-    private void signUp(ArrayList<Customer> customers,Scanner sc){
+    private void signUp(ArrayList<Customer> customers,Scanner sc,ArrayList<Ticket>tickets){
         System.out.println("Enter phone number");
         String phoneNumber=sc.nextLine();
         System.out.println("Enter your Address");
@@ -58,13 +57,53 @@ public class CustomerInfoPortal {
         customers.add(tempCustomer);
         System.out.println("Account Created !!\nUserid: "+tempCustomer.customerId);
         
-        login(customers, sc);
+        login(customers, sc,tickets);
     }
-    private void menu(Customer c,Scanner sc){
-        System.out.println("Menu");
+    private void menu(Customer c,Scanner sc,ArrayList<Ticket> tickets){
+        System.out.println("1:Pay pending payment\n0:Quit");
+        String choice = sc.nextLine();
+        boolean quit = false;
+        while(!quit){
+            if (choice.compareTo("1")==0){
+                payment(sc, c.creditCardNumber, c.latestTicketId,tickets);
+            }
+            else if (choice.compareTo("0")==0){
+                quit=true;
+            }
+            else{
+                System.out.println("Invalid Choice");
+            }
+        }
         //add option to pay and just use credit card(can't pay in cash to a machine)
         //should also close the person's ticket after payment
     } 
+    private int costCalculation(Ticket ticket){
+        float timeSpent = (float)((ticket.entryTime-System.currentTimeMillis())/2);// half an hour per millis
+        int cost=0;
+        if (timeSpent<=1.0){
+            cost=10;
+        }
+        else if(timeSpent<=2){
+            cost=20;
+        }
+        else if(timeSpent<=3){
+            cost=30;
+        }
+        else{
+            cost=10+2*10+(int)(timeSpent-3)*3;// cost is a bit less for registered cutomers
+        }
+        return cost;
+    }
+    protected void payment(Scanner sc,long creditCardNumber,String ticketId,ArrayList<Ticket>tickets){
+        // Again assuming credit card works
+        for(Ticket t:tickets){
+            if(t.ticketId.compareTo(ticketId)==0){
+                tickets.remove(t);
+                System.out.println("Cost: "+costCalculation(t));
+                System.out.println("Payment successful");
+            }
+        }
+    }
     
 
 }
