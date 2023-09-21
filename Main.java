@@ -11,7 +11,7 @@ public class Main {
         customerData.add(new Customer("c", "0000000000", null, 0, 0,"cc"));
         
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-        Floor f1 = new Floor(2, 3, 6, 7, 7, 0, 1);
+        Floor f1 = new Floor(2, 3, 6, 7, 7,6, 0, 1);
         Floor.EntryPoint e1 = f1.entryPoints[0];
         Floor.EntryPoint e2 = f1.entryPoints[1];  
         Floor.ExitPoint E1 = f1.exitPoints[0];  
@@ -21,7 +21,7 @@ public class Main {
         System.out.println("Your ticket ID: "+e2.generateTicket(sc, tickets,customerData));
         
         // Simulating payment in one exit using both methods
-        E1.payment(sc,00000000000000000, tickets);
+        E1.payment(sc,0000000000000000, tickets);
 
         //Simulating customer info portal
         new CustomerInfoPortal(sc,customerData,tickets);
