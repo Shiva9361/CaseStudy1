@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Floor {
-    // private int capacity;
+    private int capacity;
     // Diffent floors might have different number of entries and exists hence they are implemented as an array 
     // Moreover Each point of entry/exit has to supply tickets and genreate bills hene
     EntryPoint[] entryPoints;
@@ -53,6 +53,10 @@ public class Floor {
             exitId = (char)(exitId+1);
         }
     }
+
+    /*void printLayout(int capacity,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int parkingSpaceElectricVehicle){
+        for()
+    }*/
     
     boolean isfull(boolean[] parkingType){
         for (boolean occupied:parkingType){
