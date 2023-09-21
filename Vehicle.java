@@ -6,7 +6,7 @@ public class Vehicle {
     
 
 }
-public class electricVehicle extends Vehicle{
+class electricVehicle extends Vehicle{
     int charge;
     
 }
