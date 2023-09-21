@@ -4,8 +4,8 @@ public class Customer {
     String address;
     String password;
     int accountBalance;
-    int creditCardNumber;
-    Customer(String customerId,String phoneNumber,String address,int accountBalance,int creditCardNumber,String password){
+    long creditCardNumber;
+    Customer(String customerId,String phoneNumber,String address,int accountBalance,long creditCardNumber,String password){
         this.customerId=customerId;
         this.phoneNumber=phoneNumber;
         this.address=address;
