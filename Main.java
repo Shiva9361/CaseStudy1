@@ -24,9 +24,10 @@ public class Main {
         E1.payment(sc,0000000000000000, tickets);
 
         //Simulating customer info portal
-        new CustomerInfoPortal(sc,customerData,tickets);
-        
-
+        f1.customerInfoPortal= new CustomerInfoPortal(sc,customerData,tickets);
+        //Simulating electric pannel
+        f1.electricPannel=new ElectricPannel(sc);
+        //Simlating Electric Pannel
         sc.close();
     }
 }
