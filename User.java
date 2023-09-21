@@ -1,7 +1,7 @@
-public class User extends CustomerInfoPortal {
+/*public class User extends CustomerInfoPortal {
     // user only uses it for paying at the customerinfo portal
-    User(){
-   super();
+    //User(){
+        //super();
     }
      
     
@@ -9,3 +9,4 @@ public class User extends CustomerInfoPortal {
 
     
 }
+*/
