@@ -22,10 +22,11 @@ public class Main {
         Floor.ExitPoint E1 = f1.exitPoints[0];  
 
         // Simulating generation of ticket in 2 entry points
-        System.out.println(e1.generateTicket(sc, tickets));
-        System.out.println(e2.generateTicket(sc, tickets));
+        System.out.println("Your ticket ID: "+e1.generateTicket(sc, tickets));
+        System.out.println("Your ticket ID: "+e2.generateTicket(sc, tickets));
         
-        E1.payment(00000000000000, sc, tickets);
+        // Simulating payment in one exit using both methods
+        E1.payment(sc,00000000000000000, tickets);
         E1.payment(1000, sc, tickets);
 
         sc.close();
