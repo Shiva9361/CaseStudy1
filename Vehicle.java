@@ -1,56 +1,46 @@
-// dk if this is required 
-abstract class vehicle {
-   String id;
-  String typeofVehicle;
-  String typeofSpace;
+public class Vehicle {
+    String id;
+    String typeofVehicle="";
+    String typeofSpace="";
 
 }
 
-class electricVehicle extends vehicle {
-    electricVehicle(){
-    this.id="";
-    this.typeofVehicle="electric";
-   this.typeofSpace="";
+class ElectricVehicle extends Vehicle {
+    ElectricVehicle(){
+        this.typeofVehicle="electric";
+        this.typeofSpace="e";
     }
-
     int charge;
 }
-class car extends vehicle{
-    car(){
-    typeofVehicle="car";
-     id="";
-    
-    this.typeofSpace="";
+class Car extends Vehicle{
+    Car(){
+        this.typeofVehicle="car";
+        this.typeofSpace="c";
     }
 
 }
-class bus extends vehicle{
-   bus(){
-     typeofVehicle="car";
-    typeofVehicle="car";
-     id="";
-    this.typeofVehicle="electric";
-    this.typeofSpace="";
+class Bus extends Vehicle{
+    Bus(){
+        this.typeofVehicle="bus";
+        this.typeofSpace="l";
    }
 }
-class truck extends vehicle{
-    truck(){
+class Truck extends Vehicle{
+    Truck(){
+        this.typeofVehicle="truck";
+        this.typeofSpace="l";
 
-    
-     typeofVehicle="car";
-     id="";
-    this.typeofVehicle="electric";
-    this.typeofSpace="";
     }
-    
 }
-class bike extends vehicle{
-bike(){
-
-    
-     typeofVehicle="car";
-     id="";
-    this.typeofVehicle="electric";
-    this.typeofSpace="";
+class Bike extends Vehicle{
+    Bike(){
+        this.typeofVehicle="bike";
+        this.typeofSpace="m";
+    }
+}
+class Handicapvehicle extends Vehicle{
+    Handicapvehicle(){
+        this.typeofVehicle="handicap";
+        this.typeofSpace="h";
     }
 }
