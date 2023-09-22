@@ -23,6 +23,7 @@ public class ElectricPannel {
         }
     }private void refill(Scanner sc){
         System.out.println("Enter credit card number: ");
+        long creditCardNumber=sc.nextLong();sc.nextLine();
         System.out.println("Enter Amount to refill in Rupees\n(Standard Electricity converion rates apply)");
         int amount = sc.nextInt();sc.nextLine();
         //  assuming credit card is valid and people don't cheat
