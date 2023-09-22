@@ -25,7 +25,7 @@ public class CustomerInfoPortal {
             String password = sc.nextLine();
             Customer customer = new Customer(customerId, "","", 0, 0,password);
             for (Customer c:customers){
-                if ((c.customerId.compareTo(customerId)==0) && (password.compareTo(c.password)==0)){
+                if ((c.customerId.compareTo(customerId)==0) && (password.compareTo(c.passwordGetter())==0)){
                     System.out.println("Logged in");
                     login=true;customer=c;
                     break;
@@ -65,7 +65,7 @@ public class CustomerInfoPortal {
         while(!quit){
             String choice = sc.nextLine();
             if (choice.compareTo("1")==0){
-                payment(sc, c.creditCardNumber, c.latestTicketId,tickets);
+                payment(sc, c.creditCardNumberGetter(), c.latestTicketIdGetter(),tickets);
             }
             else if (choice.compareTo("0")==0){
                 quit=true;
