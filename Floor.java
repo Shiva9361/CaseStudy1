@@ -81,7 +81,6 @@ public class Floor {
     /*void printLayout(int capacity,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int parkingSpaceElectricVehicle){
         for()
     }*/
-    
     boolean isfull(String parkingType,String[][] Allotment){
         int n = Allotment.length;
         for (int i=0;i<n;i++){
@@ -117,6 +116,7 @@ public class Floor {
         }
         protected String generateTicket(Scanner sc,ArrayList<Ticket> tickets,ArrayList<Customer> customers){
             boolean correctInfo =false;
+            boolean alloted = false;
             String customerId="";
             String phoneNumber="";
             while(!correctInfo){
@@ -147,22 +147,62 @@ public class Floor {
                 if (type.compareTo("electric")==0){
                     vehicle = new ElectricVehicle();
                     typeOfVehicle="e";
+                    if (!isfull("e",Allotment)){
+                        String allotedSpace = freeSpace("e",Allotment);
+                        System.out.println(allotedSpace);
+                        alloted=true;
+                    }
+                    else{
+                         System.out.println("Floor full");
+                    }
                 }
                 else if (type.compareTo("car")==0){
                     vehicle = new Car();
                     typeOfVehicle="c";
+                    if (!isfull("c",Allotment)){
+                        String allotedSpace = freeSpace("c",Allotment);
+                        System.out.println(allotedSpace);
+                        alloted=true;
+                    }
+                    else{
+                         System.out.println("Floor full");
+                    }
                 }
                 else if (type.compareTo("bus")==0){
                     vehicle = new Bus();
                     typeOfVehicle="l";
+                    if (!isfull("l",Allotment)){
+                        String allotedSpace = freeSpace("l",Allotment);
+                        System.out.println(allotedSpace);
+                        alloted=true;
+                    }
+                    else{
+                         System.out.println("Floor full");
+                    }
                 }
                 else if (type.compareTo("truck")==0){
                     vehicle = new Truck();
                     typeOfVehicle="l";
+                    if (!isfull("l",Allotment)){
+                        String allotedSpace = freeSpace("l",Allotment);
+                        System.out.println(allotedSpace);
+                        alloted=true;
+                    }
+                    else{
+                         System.out.println("Floor full");
+                    }
                 }
                 else if (type.compareTo("bike")==0){
                     vehicle = new Bike();
                     typeOfVehicle="m";
+                    if (!isfull("m",Allotment)){
+                        String allotedSpace = freeSpace("m",Allotment);
+                        System.out.println(allotedSpace);
+                        alloted=true;
+                    }
+                    else{
+                         System.out.println("Floor full");
+                    }
                 }
                 else{
                     System.out.println("Vehicle not found in our database ..");
@@ -203,20 +243,22 @@ public class Floor {
                     System.out.println("Floor full");
                 }
             }
-            
-            Ticket tempTicket; 
-            if(customerId.compareTo("")==0 && phoneNumber.compareTo("")==0){
-                System.out.println("No data given.. Ticket generation failed");
-                return "";
+            if(alloted){
+                Ticket tempTicket; 
+                if(customerId.compareTo("")==0 && phoneNumber.compareTo("")==0){
+                    System.out.println("No data given.. Ticket generation failed");
+                    return "";
+                }
+                // If customer id is not given, use different constructor 
+                if (customerId.compareTo("")==0){
+                    tempTicket = new Ticket(phoneNumber, tickets,typeOfVehicle,vehicle);
+                }
+                else{
+                    tempTicket = new Ticket(tickets,customerId,typeOfVehicle,customers,vehicle); //
+                }
+                return tempTicket.ticketId;
             }
-            // If customer id is not given, use different constructor 
-            if (customerId.compareTo("")==0){
-                tempTicket = new Ticket(phoneNumber, tickets,typeOfVehicle,vehicle);
-            }
-            else{
-                tempTicket = new Ticket(tickets,customerId,typeOfVehicle,customers,vehicle); //
-            }
-            return tempTicket.ticketId;
+            return "";
         }
     }
     class ExitPoint extends Points{
