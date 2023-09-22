@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Floor {
@@ -11,35 +10,59 @@ public class Floor {
     /*
      * Parking space is divided based on the type and each is implemented as a boolean array
      */
-    private boolean[] parkingSpaceCompact;
-    private boolean[] parkingSpaceLarge;
-    private boolean[] parkingSpacehandicapped;
-    private boolean[] parkingSpaceMotercycle;
-    private boolean[] parkingSpaceElectricVehicle;
+    private String[][] Allotment;
     CustomerInfoPortal customerInfoPortal;
     ElectricPannel electricPannel;
-    //private int floorNumber; seems to be of no use
+    private int floorNumber; 
 
-    Floor(int entryPoints,int exitPoints,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int parkingSpaceElectricVehicle,int floorNumber){
+    Floor(int entryPoints,int exitPoints,int capacity,int floorNumber){
         this.entryPoints=new EntryPoint[entryPoints];
         this.exitPoints=new ExitPoint[exitPoints];
-        
-        this.parkingSpaceCompact=new boolean[parkingSpaceCompact];
-        Arrays.fill(this.parkingSpaceCompact,false);
-        
-        this.parkingSpaceLarge=new boolean[parkingSpaceLarge];
-        Arrays.fill(this.parkingSpaceLarge,false);
-        
-        this.parkingSpaceMotercycle=new boolean[parkingSpaceMotercycle];
-        Arrays.fill(this.parkingSpaceMotercycle,false);
-        
-        this.parkingSpacehandicapped=new boolean[parkingSpacehandicapped];
-        Arrays.fill(this.parkingSpacehandicapped,false);
-        
-        this.parkingSpaceElectricVehicle =new boolean[parkingSpaceElectricVehicle];
-        Arrays.fill(this.parkingSpaceElectricVehicle,false);
-        
-        //this.floorNumber=floorNumber;
+        this.capacity=capacity;
+        this.floorNumber=floorNumber;
+        int numberOfRows=(int)Math.sqrt(capacity)+1;
+        Allotment = new String[numberOfRows][numberOfRows];
+
+        float parkingSpaceCompactFraction=.2f;
+        float parkingSpaceLargeFraction=.2f;
+        float parkingSpaceMotercycleFraction=.4f;
+        float parkingSpacehandicappedFraction=.1f;
+        float parkingSpaceElectricVehicleFraction=.1f;
+
+        int parkingSpaceCompact=(int)(this.capacity*parkingSpaceCompactFraction);
+        int parkingSpaceLarge=(int)(this.capacity*parkingSpaceLargeFraction);
+        int parkingSpaceMotercycle=(int)(this.capacity*parkingSpaceMotercycleFraction);
+        int parkingSpacehandicapped=(int)(this.capacity*parkingSpacehandicappedFraction);
+        int parkingSpaceElectricVehicle=(int)(this.capacity*parkingSpaceElectricVehicleFraction);
+
+        for (int i=0;i<numberOfRows;i++){
+            for (int j=0;j<numberOfRows;j++){
+                if (parkingSpaceCompact>0){
+                    Allotment[i][j] = this.floorNumber+"c"+(parkingSpaceCompact)+" "+"false";
+                    parkingSpaceCompact--;
+                }
+                else if (parkingSpaceLarge>0){
+                    Allotment[i][j] = this.floorNumber+"l"+(parkingSpaceLarge)+" "+"false";
+                    parkingSpaceLarge--;
+                }
+                else if (parkingSpaceMotercycle>0){
+                    Allotment[i][j] = this.floorNumber+"m"+(parkingSpaceMotercycle)+" "+"false";
+                    parkingSpaceMotercycle--;
+                }
+                else if (parkingSpacehandicapped>0){
+                    Allotment[i][j] = this.floorNumber+"h"+(parkingSpacehandicapped)+" "+"false";
+                    parkingSpacehandicapped--;
+                }
+                else if (parkingSpaceElectricVehicle>0){
+                    Allotment[i][j] = this.floorNumber+"e"+(parkingSpaceElectricVehicle)+" "+"false";
+                    parkingSpaceElectricVehicle--;
+                }
+                else{
+                    Allotment[i][j]="";
+                }
+            }
+        }
+
         //this.capacity=parkingSpaceCompact+parkingSpaceLarge+parkingSpaceMotercycle+parkingSpacehandicapped;
 
         char entryId='a';
@@ -59,21 +82,28 @@ public class Floor {
         for()
     }*/
     
-    boolean isfull(boolean[] parkingType){
-        for (boolean occupied:parkingType){
-            if (!occupied){
-                return false;
+    boolean isfull(String parkingType,String[][] Allotment){
+        int n = Allotment.length;
+        for (int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                 if (Allotment[i][j].substring(1, 2).compareTo(parkingType)==0){
+                    return false;
+                }
             }
         }
         return true;
     }
-    int freeSpace(boolean[] parkingType){
-        for(int i=0;i<parkingType.length;i++){
-            if(!parkingType[i]){
-                return i;
+    String freeSpace(String parkingType,String[][] Allotment){
+        int n = Allotment.length;
+        for (int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                 if ((Allotment[i][j].substring(1, 2).compareTo(parkingType)==0) && (Allotment[i][j].split(" ")[1].compareTo("false")==0)){
+                    Allotment[i][j] = Allotment[i][j].split(" ")[0]+" "+"true";
+                    return Allotment[i][j].split(" ")[0];
+                }
             }
         }
-        return -1;
+        return "";
     }
     
     abstract class Points{
@@ -86,71 +116,91 @@ public class Floor {
             this.id = id;
         }
         protected String generateTicket(Scanner sc,ArrayList<Ticket> tickets,ArrayList<Customer> customers){
-
-            System.out.println("Enter Customer ID (Leave blank if not registered): ");
-            String customerId= sc.nextLine();
-            System.out.println("Enter phone number (Leave blank if customer id is given): ");
-            String phoneNumber= sc.nextLine();
-            
-            String type="";
-            while(true){
-                System.out.println("Pick a parking type\n1:Compact\n2:Large\n3:Handicapped\n4:Motercycle\n5:Electric");
-                type=sc.nextLine();
-            
-                if (type.compareTo("1")==0){
-                    if (!isfull(parkingSpaceCompact)){
-                        int allotedSpace = freeSpace(parkingSpaceCompact);
-                        parkingSpaceCompact[allotedSpace]=true;
-                    
-                    }
-                    else{
-                        System.out.println("Floor full");
-                    }
-                    break;
+            boolean correctInfo =false;
+            String customerId="";
+            String phoneNumber="";
+            while(!correctInfo){
+                System.out.println("Enter Customer ID (Leave blank if not registered): ");
+                customerId= sc.nextLine();
+                System.out.println("Enter phone number (Leave blank if customer id is given): ");
+                phoneNumber= sc.nextLine();
+                if (customerId.compareTo("")==0 && phoneNumber.compareTo("")==0){
+                    System.out.println("No data entered\nTry again");
                 }
-                else if (type.compareTo("2")==0){
-                    if (!isfull(parkingSpaceLarge)){
-                        int allotedSpace = freeSpace(parkingSpaceLarge);
-                        parkingSpaceLarge[allotedSpace]=true;
-    
-                    }
-                    else{
-                        System.out.println("Floor full");
-                    }
-                    break;
-                }
-                else if (type.compareTo("4")==0){
-                    if (!isfull(parkingSpaceMotercycle)){
-                        int allotedSpace = freeSpace(parkingSpaceMotercycle);
-                        parkingSpaceMotercycle[allotedSpace]=true;
-                    }
-                    else{
-                        System.out.println("Floor full");
-                    }
-                    break;
-                }
-                else if (type.compareTo("3")==0){
-                    if (!isfull(parkingSpacehandicapped)){
-                        int allotedSpace = freeSpace(parkingSpacehandicapped);
-                        parkingSpacehandicapped[allotedSpace]=true;
-                    }
-                    else{
-                        System.out.println("Floor full");
-                    }
-                    break;
-                }
-                else if (type.compareTo("5")==0){
-                    if (!isfull(parkingSpaceElectricVehicle)){
-                        int allotedSpace = freeSpace(parkingSpaceElectricVehicle);
-                        parkingSpaceElectricVehicle[allotedSpace]=true;
-                    }
-                    else{
-                        System.out.println("Floor full");
-                    }
-                    break;
+                else if(!(customerId.compareTo("")==0) && !Customer.customerExists(customerId,customers)){
+                    System.out.println("Ur ID id incorrect\nTry again");
                 }
                 else{
-                    System.out.println("Invalid choice");
+                    correctInfo=true;
+                }
+            }
+            System.out.println("Are you handicapped?(y/n)");
+            String choice = sc.nextLine();
+            
+            String typeOfVehicle="";
+            Vehicle vehicle = new Vehicle();
+
+            if(choice.compareTo("n")==0){
+                System.out.println("Enter vehicle type: ");
+                String type=sc.nextLine();
+                
+                if (type.compareTo("electric")==0){
+                    vehicle = new ElectricVehicle();
+                    typeOfVehicle="e";
+                }
+                else if (type.compareTo("car")==0){
+                    vehicle = new Car();
+                    typeOfVehicle="c";
+                }
+                else if (type.compareTo("bus")==0){
+                    vehicle = new Bus();
+                    typeOfVehicle="l";
+                }
+                else if (type.compareTo("truck")==0){
+                    vehicle = new Truck();
+                    typeOfVehicle="l";
+                }
+                else if (type.compareTo("bike")==0){
+                    vehicle = new Bike();
+                    typeOfVehicle="m";
+                }
+                else{
+                    System.out.println("Vehicle not found in our database ..");
+                    System.out.println("Choose between these types");
+                    while(true){
+                        System.out.println("1:Compact\n2:Large");
+                        type=sc.nextLine();
+                    
+                        if (type.compareTo("1")==0){
+                            if (!isfull("c",Allotment)){
+                                String allotedSpace = freeSpace("c",Allotment);
+                                System.out.println(allotedSpace);
+                            }
+                            else{
+                                System.out.println("Floor full");
+                            }
+                            break;
+                        }
+                        else if (type.compareTo("2")==0){
+                            if (!isfull("l",Allotment)){
+                                String allotedSpace = freeSpace("l",Allotment);
+                                System.out.println(allotedSpace);
+                            }
+                            else{
+                                System.out.println("Floor full");
+                            }
+                            break;
+                        }
+                    }
+                }
+            }   
+            else{
+                if (!isfull("h",Allotment)){
+                    String allotedSpace = freeSpace("h",Allotment);
+                    System.out.println(allotedSpace);
+                }
+                else{
+                    System.out.println("Floor full");
                 }
             }
             
@@ -161,10 +211,10 @@ public class Floor {
             }
             // If customer id is not given, use different constructor 
             if (customerId.compareTo("")==0){
-                tempTicket = new Ticket(phoneNumber, tickets,Integer.parseInt(type));
+                tempTicket = new Ticket(phoneNumber, tickets,typeOfVehicle,vehicle);
             }
             else{
-                tempTicket = new Ticket(tickets,customerId,Integer.parseInt(type),customers); //
+                tempTicket = new Ticket(tickets,customerId,typeOfVehicle,customers,vehicle); //
             }
             return tempTicket.ticketId;
         }
