@@ -11,7 +11,9 @@ public class Main {
         customerData.add(new Customer("c", "0000000000", null, 0, 0,"cc"));
         
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-        Floor f1 = new Floor(2, 3, 20, 30, 10,30, 10, 1);
+        ArrayList<Floor> floors = new ArrayList<Floor>();
+        floors.add(new Floor(2, 3, 20, 30, 10,30, 10, 0));
+        Floor f1 = floors.get(0);
         Floor.EntryPoint e1 = f1.entryPoints[0];
         Floor.EntryPoint e2 = f1.entryPoints[1];  
         Floor.ExitPoint E1 = f1.exitPoints[0];  
