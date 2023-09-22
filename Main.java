@@ -12,7 +12,8 @@ public class Main {
         
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
         ArrayList<Floor> floors = new ArrayList<Floor>();
-        floors.add(new Floor(2, 3, 20, 30, 10,30, 10, 0));
+        floors.add(new Floor(2, 3,200,0));
+        floors.add(new Floor(2, 3,200,0));
         Floor f1 = floors.get(0);
         Floor.EntryPoint e1 = f1.entryPoints[0];
         Floor.EntryPoint e2 = f1.entryPoints[1];  
