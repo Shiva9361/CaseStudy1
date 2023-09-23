@@ -98,7 +98,7 @@ public class Floor {
             exitId = (char)(exitId+1);
         }
     }
-    //A Ststic function which can be called to diplay the structure fo all floors and also the occuption details
+    //A Static function which can be called to diplay the structure fo all floors and also the occuption details
     public static void displayallStructure(ArrayList<Floor> floors){
         System.out.println("Structure of floors");
         for(Floor floor:floors){
