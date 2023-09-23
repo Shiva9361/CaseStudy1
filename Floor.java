@@ -6,15 +6,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Floor {
+    public static int floorCounter=0;// Used to keep track of the number of floors created.
     private int capacity;
     // Diffent floors might have different number of entries and exits hence they are implemented as an array 
     // Moreover Each point of entry/exit has to supply tickets and genreate bills. hence each entry/exit point is an object 
     EntryPoint[] entryPoints;
     ExitPoint[] exitPoints;
+    static String[] parkingTypes={"m","l","c","h","e"};// These are the various parking types under the hood.
     /*
      * Parking spaces are considered as a two dimensional array
      */
-    private String[][] Allotment;
+    public String[][] Allotment;
     // Physically the spaces are not the same size but for representation in code, one array element is allotted for each type
     // IN practice, the motor spaces are physically much smaller.
     protected long bankbalance=0;
@@ -24,8 +26,10 @@ public class Floor {
     ElectricPannel electricPannel;
     // Floor number is used to keep track of the floor internally
     public int floorNumber; 
+    int swappedSlots;// indicates the number of slots the admin has swapped from a differnt type
     //Parameterised constructor for floor
     Floor(int entryPoints,int exitPoints,int capacity,int floorNumber){
+        floorCounter+=1;
         this.entryPoints=new EntryPoint[entryPoints];
         this.exitPoints=new ExitPoint[exitPoints];
         this.capacity=capacity;
@@ -94,6 +98,54 @@ public class Floor {
             exitId = (char)(exitId+1);
         }
     }
+    //A Ststic function which can be called to diplay the structure fo all floors and also the occuption details
+    public static void displayallStructure(ArrayList<Floor> floors){
+        System.out.println("Structure of floors");
+        for(Floor floor:floors){
+            System.out.println("Floor: "+floor.floorNumber);
+            floor.displayOccupation();
+        }
+    }
+    // A method which can be used to get the amount of free space availabe
+    public int freespaceGetter(String parkingType){
+        int n=this.Allotment.length;
+        for (int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                if ((Allotment[i][j].substring(1, 2).compareTo(parkingType)==0) && (Allotment[i][j].split(" ")[1].compareTo("false")==0)){
+                    if (Allotment[i][j].split(" ")[0].length()==4){
+                        return Integer.parseInt(Allotment[i][j].split(" ")[0].substring(2, 4));
+                    }
+                    return Integer.parseInt(Allotment[i][j].split(" ")[0].substring(2, 3));
+                }
+            }
+        }
+        return -1;
+    }
+    // A ststic method which can be used to find the number of vacant spots of each type
+    // Does not include extra space created by admin
+    public static void displayOccuption(ArrayList<Floor> floors){
+        for(Floor floor:floors){
+            System.out.println("Floor: "+floor.floorNumber+"\n");
+            for(String parkingType:Floor.parkingTypes){
+                int count = floor.freespaceGetter(parkingType);
+                if(parkingType.compareTo("m")==0){
+                    System.out.println("MotorCycle Space Remaining: "+count);
+                }
+                else if(parkingType.compareTo("l")==0){
+                    System.out.println("Large Space Remaining: "+count);
+                }
+                else if(parkingType.compareTo("c")==0){
+                    System.out.println("Compact Space Remaining: "+count);
+                }
+                else if(parkingType.compareTo("e")==0){
+                    System.out.println("Electric vehicle Space Remaining: "+count);
+                }
+                else if(parkingType.compareTo("h")==0){
+                    System.out.println("Handicap Space Remaining: "+count);
+                } 
+            }System.out.println();
+        }
+    }
     // Display method used to display the slots in 2D space
     void displayID(){
         int n = this.Allotment.length;
@@ -116,12 +168,11 @@ public class Floor {
             for (int j=0;j<n;j++){
                 if(this.Allotment[i][j].compareTo("")!=0){
                     if (this.Allotment[i][j].split(" ")[1].length()==4){
-                        System.out.print(this.Allotment[i][j].split(" ")[1]+"  ");
+                        System.out.print("full  ");
                     }
                     else{
-                        System.out.print(this.Allotment[i][j].split(" ")[1]+" ");
+                        System.out.print("empty ");
                     }
-                    
                 }
             }
             System.out.println();
@@ -140,8 +191,8 @@ public class Floor {
         return true;
     }
     // Method used to find free parking space of a specific type and return it to be alloted for the customer
-    String freeSpace(String parkingType,String[][] Allotment){
-        int n = Allotment.length;
+    String freeSpace(String parkingType){
+        int n = this.Allotment.length;
         for (int i=0;i<n;i++){
             for (int j=0;j<n;j++){
                  if ((Allotment[i][j].substring(1, 2).compareTo(parkingType)==0) && (Allotment[i][j].split(" ")[1].compareTo("false")==0)){
@@ -207,8 +258,8 @@ public class Floor {
                     vehicle = new ElectricVehicle();
                     typeOfVehicle="e";
                     if (!isfull("e",Allotment)){
-                        String allotedSpace = freeSpace("e",Allotment);
-                        System.out.println(allotedSpace);
+                        String allotedSpace = freeSpace("e");
+                        System.out.println("Alloted space id: "+allotedSpace);
                         alloted=true;
                     }
                     else{
@@ -219,8 +270,8 @@ public class Floor {
                     vehicle = new Car();
                     typeOfVehicle="c";
                     if (!isfull("c",Allotment)){
-                        String allotedSpace = freeSpace("c",Allotment);
-                        System.out.println(allotedSpace);
+                        String allotedSpace = freeSpace("c");
+                        System.out.println("Alloted space id: "+allotedSpace);
                         alloted=true;
                     }
                     else{
@@ -231,8 +282,8 @@ public class Floor {
                     vehicle = new Bus();
                     typeOfVehicle="l";
                     if (!isfull("l",Allotment)){
-                        String allotedSpace = freeSpace("l",Allotment);
-                        System.out.println(allotedSpace);
+                        String allotedSpace = freeSpace("l");
+                        System.out.println("Alloted space id: "+allotedSpace);
                         alloted=true;
                     }
                     else{
@@ -243,8 +294,8 @@ public class Floor {
                     vehicle = new Truck();
                     typeOfVehicle="l";
                     if (!isfull("l",Allotment)){
-                        String allotedSpace = freeSpace("l",Allotment);
-                        System.out.println(allotedSpace);
+                        String allotedSpace = freeSpace("l");
+                        System.out.println("Alloted space id: "+allotedSpace);
                         alloted=true;
                     }
                     else{
@@ -255,8 +306,8 @@ public class Floor {
                     vehicle = new Bike();
                     typeOfVehicle="m";
                     if (!isfull("m",Allotment)){
-                        String allotedSpace = freeSpace("m",Allotment);
-                        System.out.println(allotedSpace);
+                        String allotedSpace = freeSpace("m");
+                        System.out.println("Alloted space id: "+allotedSpace);
                         alloted=true;
                     }
                     else{
@@ -267,8 +318,6 @@ public class Floor {
                  * If the user inputs a vehicle that's not defined in our vehicle class,
                  * We give an option for them to pick between compact and large spaces
                  */
-                 
-                
                 else{
                     System.out.println("Vehicle not found in our database ..");
                     System.out.println("Choose between these types");
@@ -278,8 +327,8 @@ public class Floor {
                     
                         if (type.compareTo("1")==0){
                             if (!isfull("c",Allotment)){
-                                String allotedSpace = freeSpace("c",Allotment);
-                                System.out.println(allotedSpace);
+                                String allotedSpace = freeSpace("c");
+                                System.out.println("Alloted space id: "+allotedSpace);
                             }
                             else{
                                 System.out.println("Floor full");
@@ -288,8 +337,8 @@ public class Floor {
                         }
                         else if (type.compareTo("2")==0){
                             if (!isfull("l",Allotment)){
-                                String allotedSpace = freeSpace("l",Allotment);
-                                System.out.println(allotedSpace);
+                                String allotedSpace = freeSpace("l");
+                                System.out.println("Alloted space id: "+allotedSpace);
                             }
                             else{
                                 System.out.println("Floor full");
@@ -304,8 +353,8 @@ public class Floor {
              */
             else{
                 if (!isfull("h",Allotment)){
-                    String allotedSpace = freeSpace("h",Allotment);
-                    System.out.println(allotedSpace);
+                    String allotedSpace = freeSpace("h");
+                    System.out.println("Alloted space id: "+allotedSpace);
                 }
                 else{
                     System.out.println("Floor full");
@@ -382,9 +431,6 @@ public class Floor {
             System.out.println("Ticket id not valid");
             return -1; 
         }
-        /*
-         *
-         */
         public int payment(Scanner sc,ArrayList<Ticket> tickets){
             System.out.println("Enter ticket id"); 
             String ticketId = sc.nextLine();
