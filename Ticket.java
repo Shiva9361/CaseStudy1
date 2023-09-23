@@ -1,3 +1,10 @@
+/*
+ * Implementing Ticket as a class,
+ * This class is used to generate a ticket object.
+ * Constructor overloading is done to achieve ticket generation in two senarios
+ * Case 1) Customer is registered and uses his customer ID
+ * Case 2) Customer is not registered and uses his phone number   
+ */
 import java.util.ArrayList;
 import java.util.UUID; // TO create unique id for tickets
 public class Ticket {
