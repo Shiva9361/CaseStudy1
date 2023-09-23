@@ -13,9 +13,10 @@ public class ElectricPannel {
      * If given more time, Can implement cutomer id integration 
      */
     private void menu(Scanner sc){
-        System.out.println("1:Pay and refill\n0:Quit");
         boolean quit = false;
         while(!quit){
+            System.out.println();
+            System.out.println("1:Pay and refill\n0:Quit");
             String choice = sc.nextLine();
             if (choice.compareTo("1")==0){
                 refill(sc);
@@ -26,8 +27,7 @@ public class ElectricPannel {
             else{
                 System.out.println("Invalid Choice");
             }
-            System.out.println();
-            System.out.println("1:Pay and refill\n0:Quit");
+            
         }
     }private void refill(Scanner sc){
         System.out.println("Enter credit card number: ");
