@@ -112,7 +112,10 @@ public class Floor {
         for (int i=0;i<n;i++){
             for (int j=0;j<n;j++){
                 if ((Allotment[i][j].substring(1, 2).compareTo(parkingType)==0) && (Allotment[i][j].split(" ")[1].compareTo("false")==0)){
-                    if (Allotment[i][j].split(" ")[0].length()==4){
+                    if (Allotment[i][j].split(" ")[0].length()==4 ){
+                        if (Allotment[i][j].split(" ")[0].substring(2, 3).compareTo("x")==0){
+                            continue;
+                        }
                         return Integer.parseInt(Allotment[i][j].split(" ")[0].substring(2, 4));
                     }
                     return Integer.parseInt(Allotment[i][j].split(" ")[0].substring(2, 3));
@@ -123,6 +126,7 @@ public class Floor {
     }
     // A ststic method which can be used to find the number of vacant spots of each type
     // Does not include extra space created by admin
+    // This is because that allotment was just temporary
     public static void displayOccuption(ArrayList<Floor> floors){
         for(Floor floor:floors){
             System.out.println("Floor: "+floor.floorNumber+"\n");
@@ -356,6 +360,7 @@ public class Floor {
                 if (!isfull("h",Allotment)){
                     String allotedSpace = freeSpace("h");
                     System.out.println("Alloted space id: "+allotedSpace);
+                    alloted=true;
                 }
                 else{
                     System.out.println("Floor full");
