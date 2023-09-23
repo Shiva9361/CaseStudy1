@@ -136,6 +136,4 @@ public class CustomerInfoPortal implements Payments{
     public int payment(Scanner sc,ArrayList<Ticket> tickets){ 
         return 0;
     }
-    
-
 }
