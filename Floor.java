@@ -1,20 +1,30 @@
+/*
+ * Floor is implemented as a class, This class can be instantiated to create an instance of floor
+ * Floor has two subclasses namely entry and exit which derive from a parent abstract class and implenet an interface
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Floor {
     private int capacity;
     // Diffent floors might have different number of entries and exits hence they are implemented as an array 
-    // Moreover Each point of entry/exit has to supply tickets and genreate bills hene
+    // Moreover Each point of entry/exit has to supply tickets and genreate bills. hence each entry/exit point is an object 
     EntryPoint[] entryPoints;
     ExitPoint[] exitPoints;
     /*
-     * Parking space is divided based on the type and each is implemented as a boolean array
+     * Parking spaces are considered as a two dimensional array
      */
     private String[][] Allotment;
-    CustomerInfoPortal customerInfoPortal;
-    ElectricPannel electricPannel;
-    private int floorNumber; 
+    // Physically the spaces are not the same size but for representation in code, one array element is allotted for each type
+    // IN practice, the motor spaces are physically much smaller.
 
+    // Each floor has it's own customer info portal.
+    CustomerInfoPortal customerInfoPortal;
+    // Electric pannel is made available for users of electric vehicles
+    ElectricPannel electricPannel;
+    // Floor number is used to keep track of the floor internally
+    private int floorNumber; 
+    //Parameterised constructor for floor
     Floor(int entryPoints,int exitPoints,int capacity,int floorNumber){
         this.entryPoints=new EntryPoint[entryPoints];
         this.exitPoints=new ExitPoint[exitPoints];
@@ -22,19 +32,23 @@ public class Floor {
         this.floorNumber=floorNumber;
         int numberOfRows=(int)Math.sqrt(capacity)+1;
         Allotment = new String[numberOfRows][numberOfRows];
-
+        /*
+         * Of all the spaces available some fraction is made availabe to each type of parking 
+         * The selection of this fraction is in accordance to data acquired from previous establishments
+         */
         float parkingSpaceCompactFraction=.2f;
         float parkingSpaceLargeFraction=.2f;
         float parkingSpaceMotercycleFraction=.4f;
         float parkingSpacehandicappedFraction=.1f;
         float parkingSpaceElectricVehicleFraction=.1f;
-
+        // Assigning number of parking spaces to each category
         int parkingSpaceCompact=(int)(this.capacity*parkingSpaceCompactFraction);
         int parkingSpaceLarge=(int)(this.capacity*parkingSpaceLargeFraction);
         int parkingSpaceMotercycle=(int)(this.capacity*parkingSpaceMotercycleFraction);
         int parkingSpacehandicapped=(int)(this.capacity*parkingSpacehandicappedFraction);
         int parkingSpaceElectricVehicle=(int)(this.capacity*parkingSpaceElectricVehicleFraction);
 
+        // Initializing the allotment array by giving unique id to each space available 
         for (int i=0;i<numberOfRows;i++){
             for (int j=0;j<numberOfRows;j++){
                 if (parkingSpaceCompact>0){
@@ -62,25 +76,58 @@ public class Floor {
                 }
             }
         }
-
-        //this.capacity=parkingSpaceCompact+parkingSpaceLarge+parkingSpaceMotercycle+parkingSpacehandicapped;
-
+        /*
+         * Entry and exit is named in alphabetical order 
+         * Theoratically there can be a maximum of 26 entry (In small alphabet) and 
+         * 26 exit in large alphabet
+         * Each Entry and exit point is statergically placed to reduce congestion. 
+         */
         char entryId='a';
         for(int i=0;i<entryPoints;i++){
-            this.entryPoints[i]=new EntryPoint((char)(entryId));
+            this.entryPoints[i]=new EntryPoint((char)(entryId),this.floorNumber);
             entryId = (char)(entryId+1);
         }
 
         char exitId='A';
         for(int i=0;i<exitPoints;i++){
-            this.exitPoints[i]=new ExitPoint((char)(exitId));
+            this.exitPoints[i]=new ExitPoint((char)(exitId),this.floorNumber);
             exitId = (char)(exitId+1);
         }
     }
-
-    /*void printLayout(int capacity,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int parkingSpaceElectricVehicle){
-        for()
-    }*/
+    // Display method used to display the slots in 2D space
+    void displayID(){
+        int n = this.Allotment.length;
+        for(int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                if (this.Allotment[i][j].split(" ")[0].length()==3){
+                    System.out.print(this.Allotment[i][j].split(" ")[0]+"  ");
+                }
+                else{
+                    System.out.print(this.Allotment[i][j].split(" ")[0]+" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+    // Display method used to display the occuptaion of floor in 2D space.
+    void displayOccupation(){
+        int n = this.Allotment.length;
+        for(int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                if(this.Allotment[i][j].compareTo("")!=0){
+                    if (this.Allotment[i][j].split(" ")[1].length()==4){
+                        System.out.print(this.Allotment[i][j].split(" ")[1]+"  ");
+                    }
+                    else{
+                        System.out.print(this.Allotment[i][j].split(" ")[1]+" ");
+                    }
+                    
+                }
+            }
+            System.out.println();
+        }
+    }
+    // Method used to check if one parking type is full
     boolean isfull(String parkingType,String[][] Allotment){
         int n = Allotment.length;
         for (int i=0;i<n;i++){
@@ -92,6 +139,7 @@ public class Floor {
         }
         return true;
     }
+    // Method used to find free parking space of a specific type and return it to be alloted for the customer
     String freeSpace(String parkingType,String[][] Allotment){
         int n = Allotment.length;
         for (int i=0;i<n;i++){
@@ -104,21 +152,32 @@ public class Floor {
         }
         return "";
     }
-    
+    /*
+     * Points is an abstract class which is extended by to child classes namely Entry and exit points
+     * Entry class overrides the generate ticket method of points
+     */
     abstract class Points{
         char id;
-        protected void generateTicket(){}
-        protected void payment(String a){}
-    }
-    class EntryPoint extends Points{
-        EntryPoint(char id){
-            this.id = id;
+        int floorNumber;
+        protected String generateTicket(Scanner sc,ArrayList<Ticket> tickets,ArrayList<Customer> customers){
+            return "";
         }
+
+    }
+    //Child class which extends abstract class points
+    class EntryPoint extends Points{
+        //Parametrised Constructor
+        EntryPoint(char id,int floorNumber){
+            this.id = id;
+            this.floorNumber=floorNumber;
+        }
+        // Method overrided from parent abstract class
         protected String generateTicket(Scanner sc,ArrayList<Ticket> tickets,ArrayList<Customer> customers){
             boolean correctInfo =false;
             boolean alloted = false;
             String customerId="";
             String phoneNumber="";
+            //Checking if atleast either a valid customer ID or phone number is given else asking for details again
             while(!correctInfo){
                 System.out.println("Enter Customer ID (Leave blank if not registered): ");
                 customerId= sc.nextLine();
@@ -204,6 +263,12 @@ public class Floor {
                          System.out.println("Floor full");
                     }
                 }
+                /*
+                 * If the user inputs a vehicle that's not defined in our vehicle class,
+                 * We give an option for them to pick between compact and large spaces
+                 */
+                 
+                
                 else{
                     System.out.println("Vehicle not found in our database ..");
                     System.out.println("Choose between these types");
@@ -234,6 +299,9 @@ public class Floor {
                     }
                 }
             }   
+            /*
+             * If the person is handicapped, alloting handicap spots
+             */
             else{
                 if (!isfull("h",Allotment)){
                     String allotedSpace = freeSpace("h",Allotment);
@@ -243,6 +311,9 @@ public class Floor {
                     System.out.println("Floor full");
                 }
             }
+            /*
+             * If for some reason no parking spot is alloted, we don't need to generate tickets   
+             */
             if(alloted){
                 Ticket tempTicket; 
                 if(customerId.compareTo("")==0 && phoneNumber.compareTo("")==0){
@@ -261,10 +332,17 @@ public class Floor {
             return "";
         }
     }
-    class ExitPoint extends Points{
-        ExitPoint(char id){
+    /*
+     * Class exit point extends the abstract class point and implemenents the payment interface
+     */
+    class ExitPoint extends Points implements Payments{
+        ExitPoint(char id,int floorNumber){
             this.id = id;
+            this.floorNumber=floorNumber;
         }
+        //Cost calculation is done using the following logic 
+        //A simple hour based system is employed
+        //For simulating purposes, the time is scaled.
         private int costCalculation(Ticket ticket){
             float timeSpent = (float)((ticket.entryTime-System.currentTimeMillis())/2);// half an hour per millis
             int cost=0;
@@ -282,7 +360,11 @@ public class Floor {
             }
             return cost;
         }
-        protected int payment(Scanner sc,long creditCardNumber,ArrayList<Ticket> tickets){
+        /*
+         * Payment method is impelmeted using method overloading 
+         * A differnt method is called depending upon whether the payment is by cash or credit card 
+         */
+        public int payment(Scanner sc,long creditCardNumber,ArrayList<Ticket> tickets){
             
             // We are assuming that credit card is in working condition and the payment is being handeled by some module
             System.out.println("Enter ticket id");
@@ -291,6 +373,7 @@ public class Floor {
                 if(t.ticketId.compareTo(ticketId)==0){
                     System.out.println("Cost: "+costCalculation(t));
                     System.out.println("Payment successful");
+                    //As soon as the payment is done, the ticket is removed from the pending payments buffer.
                     tickets.remove(t);
                     return 0;
                 }
@@ -298,16 +381,22 @@ public class Floor {
             System.out.println("Ticket id not valid");
             return -1; 
         }
-        protected int payment(int cash,Scanner sc,ArrayList<Ticket> tickets){
+        /*
+         *
+         */
+        public int payment(Scanner sc,ArrayList<Ticket> tickets){
             System.out.println("Enter ticket id"); 
             String ticketId = sc.nextLine();
             for(Ticket t:tickets){
                     if(t.ticketId.compareTo(ticketId)==0){
                         int cost = costCalculation(t);
+                        System.out.println("Amount to be paid: "+cost);
+                        System.out.println("Amount deposited : ");
+                        int cash = sc.nextInt();sc.nextLine();
                         if (cash>=cost){
                             System.out.println("Return amount: "+(cash-cost));
                             System.out.println("Payment successful");
-                            tickets.remove(t);
+                            tickets.remove(t);//As soon as the payment is done, the ticket is removed from the pending payments buffer.
                         }
                         else{
                             System.out.println("Given cash is not enough!!");
