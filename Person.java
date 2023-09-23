@@ -12,10 +12,11 @@ abstract class Person{
 }
 // Employee class extends person, If more time was given, more functionality could have been added
 class Employee extends Person{
-    int shiftfortheday=1;
+    int shiftfortheday;
     boolean presence=true;
     
-    Employee(String name,String id){
+    Employee(String name,String id,int shiftfortheday){
+        this. shiftfortheday=shiftfortheday;
         this.id=id;
         this.name=name;
     }
