@@ -46,6 +46,7 @@ public class Main {
             if(in2==1){
                    Floor.EntryPoint en1 = f1.entryPoints[0];
                    Floor.EntryPoint en2 = f1.entryPoints[1];
+                // Simulating generation of ticket in 2 entry points
                  //when ticket is generated,you will only get to see ticketids
                  // These two commands could be run on two different threads to make them run parallely
                    System.out.println("Your ticket ID: "+en1.generateTicket(sc, tickets,customerData));
@@ -61,37 +62,17 @@ public class Main {
 
             }
            else if(in2==3){
-                 f1.customerInfoPortal= new CustomerInfoPortal(sc,customerData,tickets);
-        //Simulating electric pannel
+               //Simulating customer info portal
+           f1.customerInfoPortal= new CustomerInfoPortal(sc,customerData,tickets);
            }
             else {
                  f1.electricPannel=new ElectricPannel(sc);
-        //Simlating Electric Pannel
+                 //Simlating Electric Pannel
             }
-            
-        
-        
-        // Display based on the occupation of the foors
+              // Display based on the occupation of the foors
              Floor.displayOccuption(floors);
-            
-  
-        
-      
-
-        //Simulating customer info portal
-      
-       
-        }
-        
-        
+            }
      
-        
-      
-        
-        
-        
-        // Simulating generation of ticket in 2 entry points
-
-        sc.close();
+     sc.close();
     }
 }
