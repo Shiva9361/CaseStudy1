@@ -1,0 +1,168 @@
+Structure of floors
+Floor: 0
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty 
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty 
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty 
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty
+
+Floor: 1
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty
+empty empty empty empty empty
+
+ID of various parking spaces
+0c40 0c39 0c38 0c37 0c36 0c35 0c34 0c33 0c32 0c31 0c30 0c29 0c28 0c27 0c26
+0c25 0c24 0c23 0c22 0c21 0c20 0c19 0c18 0c17 0c16 0c15 0c14 0c13 0c12 0c11
+0c10 0c9  0c8  0c7  0c6  0c5  0c4  0c3  0c2  0c1  0l40 0l39 0l38 0l37 0l36
+0l35 0l34 0l33 0l32 0l31 0l30 0l29 0l28 0l27 0l26 0l25 0l24 0l23 0l22 0l21
+0l20 0l19 0l18 0l17 0l16 0l15 0l14 0l13 0l12 0l11 0l10 0l9  0l8  0l7  0l6
+0l5  0l4  0l3  0l2  0l1  0m80 0m79 0m78 0m77 0m76 0m75 0m74 0m73 0m72 0m71
+0m70 0m69 0m68 0m67 0m66 0m65 0m64 0m63 0m62 0m61 0m60 0m59 0m58 0m57 0m56
+0m55 0m54 0m53 0m52 0m51 0m50 0m49 0m48 0m47 0m46 0m45 0m44 0m43 0m42 0m41
+0m40 0m39 0m38 0m37 0m36 0m35 0m34 0m33 0m32 0m31 0m30 0m29 0m28 0m27 0m26
+0m25 0m24 0m23 0m22 0m21 0m20 0m19 0m18 0m17 0m16 0m15 0m14 0m13 0m12 0m11
+0m10 0m9  0m8  0m7  0m6  0m5  0m4  0m3  0m2  0m1  0h20 0h19 0h18 0h17 0h16
+0h15 0h14 0h13 0h12 0h11 0h10 0h9  0h8  0h7  0h6  0h5  0h4  0h3  0h2  0h1
+0e20 0e19 0e18 0e17 0e16 0e15 0e14 0e13 0e12 0e11 0e10 0e9  0e8  0e7  0e6
+0e5  0e4  0e3  0e2  0e1
+
+Enter the slot code for which you need more slots
+c
+The available slots are:
+m
+l
+h
+e
+Pick from the above slots
+l
+ID of various parking spaces
+0c40 0c39 0c38 0c37 0c36 0c35 0c34 0c33 0c32 0c31 0c30 0c29 0c28 0c27 0c26
+0c25 0c24 0c23 0c22 0c21 0c20 0c19 0c18 0c17 0c16 0c15 0c14 0c13 0c12 0c11
+0c10 0c9  0c8  0c7  0c6  0c5  0c4  0c3  0c2  0c1  0cx1 0l39 0l38 0l37 0l36
+0l35 0l34 0l33 0l32 0l31 0l30 0l29 0l28 0l27 0l26 0l25 0l24 0l23 0l22 0l21
+0l20 0l19 0l18 0l17 0l16 0l15 0l14 0l13 0l12 0l11 0l10 0l9  0l8  0l7  0l6
+0l5  0l4  0l3  0l2  0l1  0m80 0m79 0m78 0m77 0m76 0m75 0m74 0m73 0m72 0m71
+0m70 0m69 0m68 0m67 0m66 0m65 0m64 0m63 0m62 0m61 0m60 0m59 0m58 0m57 0m56
+0m55 0m54 0m53 0m52 0m51 0m50 0m49 0m48 0m47 0m46 0m45 0m44 0m43 0m42 0m41
+0m40 0m39 0m38 0m37 0m36 0m35 0m34 0m33 0m32 0m31 0m30 0m29 0m28 0m27 0m26
+0m25 0m24 0m23 0m22 0m21 0m20 0m19 0m18 0m17 0m16 0m15 0m14 0m13 0m12 0m11
+0m10 0m9  0m8  0m7  0m6  0m5  0m4  0m3  0m2  0m1  0h20 0h19 0h18 0h17 0h16
+0h15 0h14 0h13 0h12 0h11 0h10 0h9  0h8  0h7  0h6  0h5  0h4  0h3  0h2  0h1
+0e20 0e19 0e18 0e17 0e16 0e15 0e14 0e13 0e12 0e11 0e10 0e9  0e8  0e7  0e6
+0e5  0e4  0e3  0e2  0e1
+               
+Enter Customer ID (Leave blank if not registered):
+
+Enter phone number (Leave blank if customer id is given):
+9876567654
+Are you handicapped?(y/n)
+y
+Alloted space id: 0h20
+Your ticket ID: 5a2c235
+Enter Customer ID (Leave blank if not registered):
+a
+Enter phone number (Leave blank if customer id is given):
+
+Are you handicapped?(y/n)
+n
+Enter vehicle type:
+car
+Alloted space id: 0c40
+Your ticket ID: 3a2f3e6
+Floor: 0
+
+MotorCycle Space Remaining: 80
+Large Space Remaining: 39
+Compact Space Remaining: 39
+Handicap Space Remaining: 19
+Electric vehicle Space Remaining: 20
+
+Floor: 1
+
+MotorCycle Space Remaining: 80
+Large Space Remaining: 40
+Compact Space Remaining: 40
+Handicap Space Remaining: 20
+Electric vehicle Space Remaining: 20
+
+ID of various parking spaces
+0c40 0c39 0c38 0c37 0c36 0c35 0c34 0c33 0c32 0c31 0c30 0c29 0c28 0c27 0c26
+0c25 0c24 0c23 0c22 0c21 0c20 0c19 0c18 0c17 0c16 0c15 0c14 0c13 0c12 0c11
+0c10 0c9  0c8  0c7  0c6  0c5  0c4  0c3  0c2  0c1  0cx1 0l39 0l38 0l37 0l36
+0l35 0l34 0l33 0l32 0l31 0l30 0l29 0l28 0l27 0l26 0l25 0l24 0l23 0l22 0l21
+0l20 0l19 0l18 0l17 0l16 0l15 0l14 0l13 0l12 0l11 0l10 0l9  0l8  0l7  0l6
+0l5  0l4  0l3  0l2  0l1  0m80 0m79 0m78 0m77 0m76 0m75 0m74 0m73 0m72 0m71
+0m70 0m69 0m68 0m67 0m66 0m65 0m64 0m63 0m62 0m61 0m60 0m59 0m58 0m57 0m56
+0m55 0m54 0m53 0m52 0m51 0m50 0m49 0m48 0m47 0m46 0m45 0m44 0m43 0m42 0m41
+0m40 0m39 0m38 0m37 0m36 0m35 0m34 0m33 0m32 0m31 0m30 0m29 0m28 0m27 0m26
+0m25 0m24 0m23 0m22 0m21 0m20 0m19 0m18 0m17 0m16 0m15 0m14 0m13 0m12 0m11
+0m10 0m9  0m8  0m7  0m6  0m5  0m4  0m3  0m2  0m1  0h20 0h19 0h18 0h17 0h16
+0h15 0h14 0h13 0h12 0h11 0h10 0h9  0h8  0h7  0h6  0h5  0h4  0h3  0h2  0h1
+0e20 0e19 0e18 0e17 0e16 0e15 0e14 0e13 0e12 0e11 0e10 0e9  0e8  0e7  0e6
+0e5  0e4  0e3  0e2  0e1
+
+Enter ticket id
+3a2f3e6
+Cost: 20
+Payment successful
+Customer Info Portal
+Existing User?(y/n)
+y
+Login
+UserName:
+a
+Password:
+aa
+Logged in
+
+1:Pay pending payment
+0:Quit
+1
+No pending Payments
+
+1:Pay pending payment
+0:Quit
+0
+Electric Pannel
+
+1:Pay and refill
+0:Quit
+1
+Enter credit card number:
+0000000000
+No credit card number given..
+
+1:Pay and refill
+0:Quit
+1
+Enter credit card number:
+123456789876
+Enter Amount to refill in Rupees
+(Standard Electricity converion rates apply)
+1000
+Done recharging for 1000
+
+1:Pay and refill
+0:Quit
+0
