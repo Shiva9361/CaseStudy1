@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Floor {
-    private int capacity;
+    //private int capacity;
     // Diffent floors might have different number of entries and exits hence they are implemented as an array 
     // Moreover Each point of entry/exit has to supply tickets and genreate bills hene
     EntryPoint[] entryPoints;
@@ -41,7 +41,12 @@ public class Floor {
         
         //this.floorNumber=floorNumber;
         //this.capacity=parkingSpaceCompact+parkingSpaceLarge+parkingSpaceMotercycle+parkingSpacehandicapped;
-
+        /*
+         * Entry and exit is named in alphabetical order 
+         * Theoratically there can be a maximum of 26 entry (In small alphabet) and 
+         * 26 exit in large alphabet
+         * Each Entry and exit point is statergically placed to reduce congestion. 
+         */
         char entryId='a';
         for(int i=0;i<entryPoints;i++){
             this.entryPoints[i]=new EntryPoint((char)(entryId));
@@ -54,11 +59,7 @@ public class Floor {
             exitId = (char)(exitId+1);
         }
     }
-
-    /*void printLayout(int capacity,int parkingSpaceCompact,int parkingSpaceLarge,int parkingSpacehandicapped,int parkingSpaceMotercycle,int parkingSpaceElectricVehicle){
-        for()
-    }*/
-    
+    //Method to check if a particular type is full
     boolean isfull(boolean[] parkingType){
         for (boolean occupied:parkingType){
             if (!occupied){
@@ -67,6 +68,7 @@ public class Floor {
         }
         return true;
     }
+    //Method to get a free space of a particular type
     int freeSpace(boolean[] parkingType){
         for(int i=0;i<parkingType.length;i++){
             if(!parkingType[i]){
@@ -75,16 +77,23 @@ public class Floor {
         }
         return -1;
     }
-    
+    /*
+     * Points is an abstract class which is extended by to child classes namely Entry and exit points
+     * Entry class overrides the generate ticket method of points
+     */
     abstract class Points{
         char id;
         protected void generateTicket(){}
         protected void payment(String a){}
     }
+    //Child class which extends abstract class points
     class EntryPoint extends Points{
         EntryPoint(char id){
             this.id = id;
         }
+        /*
+         * A very primitive genertaion method, Made way better in version 2
+         */
         protected String generateTicket(Scanner sc,ArrayList<Ticket> tickets,ArrayList<Customer> customers){
 
             System.out.println("Enter Customer ID (Leave blank if not registered): ");
@@ -169,6 +178,7 @@ public class Floor {
             return tempTicket.ticketId;
         }
     }
+    //Child class which inherits from point
     class ExitPoint extends Points{
         ExitPoint(char id){
             this.id = id;
