@@ -15,6 +15,7 @@ public class Main {
         floors.add(new Floor(2, 3,200,0));
         floors.add(new Floor(2, 3,200,0));
         Floor f1 = floors.get(0);
+        
         Floor.EntryPoint e1 = f1.entryPoints[0];
         Floor.EntryPoint e2 = f1.entryPoints[1];  
         Floor.ExitPoint E1 = f1.exitPoints[0];  
@@ -22,6 +23,8 @@ public class Main {
         // Simulating generation of ticket in 2 entry points
         System.out.println("Your ticket ID: "+e1.generateTicket(sc, tickets,customerData));
         System.out.println("Your ticket ID: "+e2.generateTicket(sc, tickets,customerData));
+        f1.displayOccupation();
+        f1.displayID();
         
         // Simulating payment in one exit
         E1.payment(sc,0000000000000000, tickets);
