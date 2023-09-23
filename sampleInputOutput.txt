@@ -1,0 +1,70 @@
+Enter Customer ID (Leave blank if not registered): 
+
+Enter phone number (Leave blank if customer id is given):
+9876545678
+Pick a parking type
+1:Compact
+2:Large
+3:Handicapped
+4:Motercycle
+5:Electric
+4
+Your ticket ID: 426d2a7
+Enter Customer ID (Leave blank if not registered):
+a
+Enter phone number (Leave blank if customer id is given):
+
+Pick a parking type
+1:Compact
+2:Large
+3:Handicapped
+4:Motercycle
+5:Electric
+5
+Your ticket ID: 6f7e8d8
+Enter ticket id
+426d2a7 
+Cost: 20
+Payment successful
+Customer Info Portal
+Existing User?(y/n)
+y
+Login
+UserName:
+a
+Password:
+aa
+Logged in
+1:Pay pending payment
+0:Quit
+1
+Cost: 10
+Payment successful
+
+1:Pay pending payment
+0:Quit
+0
+
+1:Pay pending payment
+0:Quit
+Electric Pannel
+1:Pay and refill
+0:Quit
+1
+Enter credit card number:
+0000 
+No credit card number given..
+
+1:Pay and refill
+0:Quit
+1
+Enter credit card number:
+123454323445
+Enter Amount to refill in Rupees
+(Standard Electricity converion rates apply)
+1234
+Done recharging for 1234
+
+1:Pay and refill
+0:Quit
+0
