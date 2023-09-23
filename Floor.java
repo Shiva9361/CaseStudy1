@@ -17,7 +17,7 @@ public class Floor {
     private String[][] Allotment;
     // Physically the spaces are not the same size but for representation in code, one array element is allotted for each type
     // IN practice, the motor spaces are physically much smaller.
-
+    protected long bankbalance=0;
     // Each floor has it's own customer info portal.
     CustomerInfoPortal customerInfoPortal;
     // Electric pannel is made available for users of electric vehicles
@@ -374,6 +374,7 @@ public class Floor {
                     System.out.println("Cost: "+costCalculation(t));
                     System.out.println("Payment successful");
                     //As soon as the payment is done, the ticket is removed from the pending payments buffer.
+                     bankbalance+=costCalculation(t);
                     tickets.remove(t);
                     return 0;
                 }
@@ -396,6 +397,7 @@ public class Floor {
                         if (cash>=cost){
                             System.out.println("Return amount: "+(cash-cost));
                             System.out.println("Payment successful");
+                             bankbalance+=costCalculation(t);
                             tickets.remove(t);//As soon as the payment is done, the ticket is removed from the pending payments buffer.
                         }
                         else{
