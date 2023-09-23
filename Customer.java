@@ -1,3 +1,7 @@
+/*
+ * Implementing customer as a class, Whenever a customer registers themselves in the customer info portal,
+ * A customer object is created and this object is pushed into the customer array list.
+ */
 public class Customer {
     String customerId;
     String phoneNumber;
