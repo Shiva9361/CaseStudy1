@@ -75,9 +75,10 @@ public class CustomerInfoPortal implements Payments{
         login(customers, sc,tickets);
     }
     private void menu(Scanner sc,ArrayList<Ticket> tickets){
-        System.out.println("1:Pay pending payment\n0:Quit");
         boolean quit = false;
         while(!quit){
+            System.out.println();
+            System.out.println("1:Pay pending payment\n0:Quit");
             String choice = sc.nextLine();
             if (choice.compareTo("1")==0){
                 payment(sc, this.customer.creditCardNumberGetter(),tickets);
@@ -88,8 +89,7 @@ public class CustomerInfoPortal implements Payments{
             else{
                 System.out.println("Invalid Choice");
             }
-            System.out.println();
-            System.out.println("1:Pay pending payment\n0:Quit");
+
         }
         //add option to pay and just use credit card(can't pay in cash to a machine)
         //should also close the person's ticket after payment
