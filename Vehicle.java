@@ -1,3 +1,11 @@
+/*
+ * Implementing vehicle as a parent class form which All specific vehicles will inherit
+ * This is done instead of using an abstract class as this gives the option to dynamically upcast the child objects
+ * Which reduces the complexity of code significantly
+ * 
+ * All general vehicles have been added 
+ * We are considering that people who want to use the handicap space are using vehicles made specially for them
+ */
 public class Vehicle {
     String id;
     String typeofVehicle="";
