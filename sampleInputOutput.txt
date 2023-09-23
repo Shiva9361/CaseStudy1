@@ -1,3 +1,4 @@
+Sample input output of main1
 Structure of floors
 Floor: 0
 empty empty empty empty empty empty empty empty empty empty empty empty empty empty empty 
