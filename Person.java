@@ -14,8 +14,23 @@ class Employee extends Person{
 
 }
 class Admin extends Person{
-    void changeSlots(String p){
-        
+    void changeSlots(String Allotment[][],Scanner sc,int floornumber){
+        System.out.println("Enter the slot code for whatever slot you want to change");
+        String p=sc.next();
+        System.out.println("the available slots are ");
+       
+      int n=Allotment.length;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                   if(Allotment[i][j].split(" ")[1]=="false"){
+                         Allotment[i][j]=floornumber+p+"temp"+" "+"true";
+                         break;
+                   }
+            }
+
+        }
+       
+
     };
     //to be able to change the slots
 
