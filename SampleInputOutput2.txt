@@ -1,0 +1,131 @@
+Sample input output of main2
+
+Do you want to manage or use the parling lot?
+1.Manage 2.User
+2
+You are at??
+1.entry
+2.exit
+3.use customerInfoPortal
+4.use electricpannel
+5.quit
+1
+Enter Customer ID (Leave blank if not registered):
+a
+Enter phone number (Leave blank if customer id is given):
+
+Are you handicapped?(y/n)
+y
+Alloted space id: 0h20
+Your ticket ID: 100b1d0
+You are at??
+1.entry
+2.exit
+3.use customerInfoPortal
+4.use electricpannel
+5.quit
+1
+Enter Customer ID (Leave blank if not registered):
+
+Enter phone number (Leave blank if customer id is given):
+
+No data entered
+Try again
+Enter Customer ID (Leave blank if not registered):
+
+Enter phone number (Leave blank if customer id is given):
+2345675434
+Are you handicapped?(y/n)
+n
+Enter vehicle type:
+car
+Alloted space id: 0c40
+Your ticket ID: a4c3f3d
+You are at??
+1.entry
+2.exit
+3.use customerInfoPortal
+4.use electricpannel
+5.quit
+2
+Enter ticket id
+0c40
+Ticket id not valid
+You are at??
+1.entry
+2.exit
+3.use customerInfoPortal
+4.use electricpannel
+5.quit
+2
+Enter ticket id
+a4c3f3d
+Cost: 20
+Payment successful
+You are at??
+1.entry
+2.exit
+3.use customerInfoPortal
+4.use electricpannel
+5.quit
+3
+Customer Info Portal
+Existing User?(y/n)
+y
+Login
+UserName:
+a
+Password:
+aa
+Logged in
+
+1:Pay pending payment
+0:Quit
+1
+Cost: 10
+Payment successful
+
+1:Pay pending payment
+0:Quit
+0
+You are at??
+1.entry
+2.exit
+3.use customerInfoPortal
+4.use electricpannel
+5.quit
+4
+Electric Pannel
+
+1:Pay and refill
+0:Quit
+1
+Enter credit card number:
+000
+No credit card number given..
+
+1:Pay and refill
+0:Quit
+10000000000000
+Invalid Choice
+
+1:Pay and refill
+0:Quit
+1
+Enter credit card number:
+1000000000000
+Enter Amount to refill in Rupees
+(Standard Electricity converion rates apply)
+100
+Done recharging for 100
+
+1:Pay and refill
+0:Quit
+0
+You are at??
+1.entry
+2.exit
+3.use customerInfoPortal
+4.use electricpannel
+5.quit
+5
