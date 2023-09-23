@@ -1,3 +1,7 @@
+/*
+ * This main class is included to give a modular look at the class and functions being implemnetd with minimal effort
+ * from the person checkig the code
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,12 +29,11 @@ public class Main {
         Admin a=new Admin("John","1");
         //ArrayList<Employee> employees=new ArrayList<Employee>();
         //Not using the array of employee as the functionality was dropped due to time constraint
+        
         // Showing the ability to change slots
         f1.displayID();
         a.changeSlots(f1.Allotment, sc, f1);
         f1.displayID();
-        
-        
         // Simulating generation of ticket in 2 entry points
         // These two commands could be run on two different threads to make them run parallely
         System.out.println("Your ticket ID: "+en1.generateTicket(sc, tickets,customerData));
