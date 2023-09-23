@@ -23,7 +23,7 @@ public class Floor {
     // Electric pannel is made available for users of electric vehicles
     ElectricPannel electricPannel;
     // Floor number is used to keep track of the floor internally
-    private int floorNumber; 
+    public int floorNumber; 
     //Parameterised constructor for floor
     Floor(int entryPoints,int exitPoints,int capacity,int floorNumber){
         this.entryPoints=new EntryPoint[entryPoints];
