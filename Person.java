@@ -35,7 +35,7 @@ class Admin extends Person{
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 if(Allotment[i][j].split(" ")[1]=="false"){
-                    Allotment[i][j]=floor.floorNumber+p+"temp"+" "+"true";
+                    Allotment[i][j]=floor.floorNumber+slot+"temp"+" "+"true";
                     break;
                 }
             }
