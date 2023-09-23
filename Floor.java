@@ -148,6 +148,7 @@ public class Floor {
     }
     // Display method used to display the slots in 2D space
     void displayID(){
+        System.out.println("ID of various parking spaces");
         int n = this.Allotment.length;
         for(int i=0;i<n;i++){
             for (int j=0;j<n;j++){
