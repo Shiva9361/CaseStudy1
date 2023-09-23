@@ -119,7 +119,7 @@ public class CustomerInfoPortal implements Payments{
         String ticketId = this.customer.latestTicketIdGetter();
         // Assuming credit card works
         // Using the last ticket id associated with the customer to do payments
-        // If that string is null or if the ticket isn't pre
+        // If that string is null or if the ticket isn't present
         for(Ticket t:tickets){
             if(t.ticketId.compareTo(ticketId)==0){
                 tickets.remove(t);
