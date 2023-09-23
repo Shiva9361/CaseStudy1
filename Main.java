@@ -17,9 +17,10 @@ public class Main {
         floors.add(new Floor(2, 3,200,0));
         Floor f1 = floors.get(0);
         
-        Floor.EntryPoint e1 = f1.entryPoints[0];
-        Floor.EntryPoint e2 = f1.entryPoints[1];  
+        Floor.EntryPoint en1 = f1.entryPoints[0];
+        Floor.EntryPoint en2 = f1.entryPoints[1];  
         Floor.ExitPoint E1 = f1.exitPoints[0]; 
+        /* 
          Employee e1=new Employee("ram",1);
       Employee e2=new Employee("sam",2);
       Employee e3=new Employee("sita",3);
@@ -34,11 +35,11 @@ public class Main {
       employees.add(e5);
       for(Employee e:employees){
         System.out.print(e.name);
-      }
+      }*/
 
         // Simulating generation of ticket in 2 entry points
-        System.out.println("Your ticket ID: "+e1.generateTicket(sc, tickets,customerData));
-        System.out.println("Your ticket ID: "+e2.generateTicket(sc, tickets,customerData));
+        System.out.println("Your ticket ID: "+en1.generateTicket(sc, tickets,customerData));
+        System.out.println("Your ticket ID: "+en2.generateTicket(sc, tickets,customerData));
         f1.displayOccupation();
         f1.displayID();
         
