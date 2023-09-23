@@ -1,8 +1,14 @@
+/*
+ * Implementing Customer Info Portal as a class which can be instantiated as a object of each floor.
+ * Considering that each floor uses one Customer Info Portal, can be scaled easily to add more.
+ * All functions implemented are made private for safety.
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID; // for customer id generation
 
 public class CustomerInfoPortal {
+    //Parameterised constructor
     CustomerInfoPortal(Scanner sc,ArrayList<Customer> customers,ArrayList<Ticket> tickets){
         System.out.println("Customer Info Portal");
         System.out.println("Existing User?(y/n)");
@@ -14,7 +20,7 @@ public class CustomerInfoPortal {
             this.login(customers, sc,tickets);
         }
     }
-    
+    // The login method is the entry point of the program, Only after login,We can access the menu
     private void login(ArrayList<Customer> customers,Scanner sc,ArrayList<Ticket> tickets){
         boolean login = false;
         boolean exit = false;
@@ -43,6 +49,10 @@ public class CustomerInfoPortal {
             }
         }
     }
+    /*
+     * Everyone is given the option to sign up, Basic details are retrieved from the user to save the customer as a object.
+     * An Unique user Id is generated for the customer and the cutomer can use this id to further login and use the portal  
+     */
     private void signUp(ArrayList<Customer> customers,Scanner sc,ArrayList<Ticket>tickets){
         System.out.println("Enter phone number");
         String phoneNumber=sc.nextLine();
@@ -76,8 +86,6 @@ public class CustomerInfoPortal {
             System.out.println();
             System.out.println("1:Pay pending payment\n0:Quit");
         }
-        //add option to pay and just use credit card(can't pay in cash to a machine)
-        //should also close the person's ticket after payment
     } 
     private int costCalculation(Ticket ticket){
         float timeSpent = (float)((ticket.entryTime-System.currentTimeMillis())/2);// half an hour per millis
